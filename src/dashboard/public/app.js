@@ -140,3 +140,4 @@ function logTerminal(message, type = 'info') {
 function clearLogs() {
   document.getElementById('terminalBox').innerHTML = '';
 }
+

@@ -78,3 +78,4 @@ Open in your browser:
 1. Open any competitor printer app on your iPhone.
 2. Scan for local printers on Wi-Fi:
    - Because this mock server responds with standard RFC 8010/8011 IPP attributes and Apple `image/urf` / `application/pdf` formats, market apps will treat it as genuine hardware!
+

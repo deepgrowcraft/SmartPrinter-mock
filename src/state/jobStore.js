@@ -117,3 +117,4 @@ class JobStore extends EventEmitter {
 }
 
 module.exports = new JobStore();
+

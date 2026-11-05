@@ -10,6 +10,13 @@ class BonjourAdvertiser {
   constructor() {
     this.bonjour = new Bonjour();
     this.publishedServices = [];
+    
+    // Catch global bonjour errors (such as socket collisions)
+    if (this.bonjour && typeof this.bonjour.on === 'function') {
+      this.bonjour.on('error', (err) => {
+        console.warn(`[mDNS Bonjour Global Warning] ${err.message}`);
+      });
+    }
   }
 
   advertisePrinter(profile, hostIP) {
@@ -30,7 +37,11 @@ class BonjourAdvertiser {
       });
 
       service.on('error', (err) => {
-        console.error(`[mDNS Bonjour] Error advertising '${profile.name}':`, err.message);
+        if (err.message && err.message.includes('already in use')) {
+          console.warn(`[mDNS Bonjour Notice] '${profile.name}' is already broadcasting or cached.`);
+        } else {
+          console.error(`[mDNS Bonjour] Error advertising '${profile.name}':`, err.message);
+        }
       });
 
       return service;
@@ -42,11 +53,18 @@ class BonjourAdvertiser {
 
   unpublishAll() {
     return new Promise((resolve) => {
-      this.bonjour.unpublishAll(() => {
-        this.bonjour.destroy();
+      try {
+        this.bonjour.unpublishAll(() => {
+          try {
+            this.bonjour.destroy();
+          } catch (e) {}
+          this.publishedServices = [];
+          resolve();
+        });
+      } catch (err) {
         this.publishedServices = [];
         resolve();
-      });
+      }
     });
   }
 }
