@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Printer — Virtual Multi-Brand Printer Farm</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Top Header -->
+    <header class="header">
+      <div class="header-left">
+        <div class="logo-badge">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+            <rect x="6" y="14" width="12" height="8"></rect>
+          </svg>
+        </div>
+        <div>
+          <h1>Smart Printer Virtual Farm</h1>
+          <p class="subtitle">Multi-Brand AirPrint & IPP Test Server for iOS & Market Apps</p>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="network-badge">
+          <span class="pulse-dot"></span>
+          <span id="networkIp">Discoverable on Wi-Fi</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <!-- Section 1: Virtual Printers Fleet -->
+      <section class="section">
+        <div class="section-header">
+          <h2>Active Virtual Printers</h2>
+          <span class="badge" id="printersCount">Loading...</span>
+        </div>
+        <div class="printers-grid" id="printersGrid">
+          <!-- Dynamic Printer Cards inserted here -->
+        </div>
+      </section>
+
+      <!-- Section 2: Received Print Jobs -->
+      <section class="section">
+        <div class="section-header">
+          <h2>Captured Print Jobs (Live Feed)</h2>
+          <span class="badge badge-accent" id="jobsCount">0 Jobs</span>
+        </div>
+        <div class="table-container">
+          <table class="jobs-table">
+            <thead>
+              <tr>
+                <th>Job ID</th>
+                <th>Printer</th>
+                <th>Document Title</th>
+                <th>Client IP</th>
+                <th>App / User Agent</th>
+                <th>Format</th>
+                <th>Size</th>
+                <th>Time</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="jobsTableBody">
+              <tr>
+                <td colspan="9" class="empty-state">No print jobs received yet. Send a test print from your iPhone!</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section 3: Live Terminal Event Stream -->
+      <section class="section">
+        <div class="section-header">
+          <h2>Live Network Handshake Stream</h2>
+          <button class="btn-clear" onclick="clearLogs()">Clear Logs</button>
+        </div>
+        <div class="terminal-box" id="terminalBox">
+          <div class="log-line info">[System] Virtual Printer Farm initialized. Listening for mDNS queries and IPP jobs...</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
